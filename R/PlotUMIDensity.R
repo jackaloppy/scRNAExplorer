@@ -36,7 +36,7 @@ PlotUMIDensity <- function(seuratObject, group = NULL, vlineIntercept = 500) {
   } else {
     aes_mappings <- aes(x = nCount_RNA)
   }
-
+  options(scipen = 999)
   # Create the base plot
   p <- ggplot(metadata, aes_mappings) +
     geom_density(alpha = 0.2) +
