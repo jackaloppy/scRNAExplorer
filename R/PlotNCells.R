@@ -7,22 +7,31 @@
 #' PlotNCellsPerSample(seuratObject, sample = "Group")
 #' @import ggplot2
 #' @import dplyr
-PlotNCells <- function(seuratObject, sample = "orig.ident") {
+#' @export
+PlotNCells <- function(seuratObject, group = NULL) {
   # Extract metadata
   metadata <- seuratObject@meta.data
 
-  # Check if sample column is specified and exists
-  if (!is.null(sample) && sample %in% names(metadata)) {
-    # Plot separate bars for each sample
-    p <- ggplot(metadata, aes_string(x = sample, fill = sample)) +
-      geom_bar() +
-      theme_classic() +
-      xlab(sample) +
-      ylab("Count") +
-      theme(axis.text.x = element_text(angle = 45, vjust = 1, hjust=1)) +
-      ggtitle("Number of Cells per Sample")
-  return(p)
+  # Define the aesthetic mappings
+  if (!is.null(group) && group %in% names(metadata)) {
+    # If group column is specified and exists
+    aes_mappings <- aes_string(x = group, fill = group)
+    x_label <- group
+  } else {
+    # Default to 'orig.ident' if group is not specified
+    aes_mappings <- aes(x = orig.ident, fill = orig.ident)
+    x_label <- "orig.ident"
   }
-  ## test3
-}
 
+  # Create the plot
+  p <- ggplot(metadata, aes_mappings) +
+    geom_bar() +
+    theme_classic() +
+    xlab(x_label) +
+    ylab("Count") +
+    theme(axis.text.x = element_text(angle = 45, vjust = 1, hjust=1),
+          plot.title = element_text(hjust=0.5, face="bold")) +
+    ggtitle("Number of Cells per group")
+
+  return(p)
+}

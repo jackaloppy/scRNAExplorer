@@ -7,7 +7,7 @@
 PlotNCells(seuratObject, sample = "orig.ident")
 }
 \arguments{
-\item{seuratObject}{A Seurat object with a 'sample' column in the metadata.}
+\item{seuratObject}{A Seurat object with a 'Group' column in the metadata.}
 
 \item{sample}{Optional; the name of the metadata column to use for grouping.}
 }
@@ -18,5 +18,5 @@ A ggplot object showing the number of cells per sample.
 Plot Number of Cells per Sample from Seurat Object Metadata
 }
 \examples{
-PlotNCellsPerSample(seuratObject)
+PlotNCellsPerSample(seuratObject, sample = "Group")
 }

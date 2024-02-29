@@ -9,7 +9,7 @@
 #' @param resolution Resolution parameter for FindClusters.
 #' @return A Seurat object with PCA, clustering, and UMAP results.
 #' @export
-ComprehensiveSeuratAnalysis <- function(seuratObject, dims = 10 , resolution = 0.5) {
+RunClusterandUMAP <- function(seuratObject, dims = 10 , resolution = 0.5) {
   # Assuming the initial steps up to PCA have been done
 
   # Find neighbors
