@@ -9,20 +9,32 @@
 #' @import ggplot2
 #' @import dplyr
 #' @export
-PlotUMIDensity <- function(seuratObject, group = NULL) {
+PlotUMIDensity <- function(seuratObject, group = NULL, vlineIntercept = 500) {
+  # Ensure the Seurat object is correctly provided
+  if (!"Seurat" %in% class(seuratObject)) {
+    stop("The provided object is not a Seurat object.")
+  }
+
   # Extract metadata
   metadata <- seuratObject@meta.data
 
-  # Define the aesthetic mappings
-  if (!is.null(group) && group %in% names(metadata)) {
-    # If group column is specified and exists
-    aes_mappings <- aes(x = nCount_RNA, fill = .data[[group]],
-                        color = .data[[group]])
-    x_label <- group
+  # Ensure nCount_RNA is treated as numeric, if it's not, try to convert it
+  metadata$nCount_RNA <- as.numeric(metadata$nCount_RNA)
+
+  # Check for group or use a default column
+  fill_color_column <- if (!is.null(group) && group %in% names(metadata)) {
+    group
+  } else if ('orig.ident' %in% names(metadata)) {
+    'orig.ident'
   } else {
-    # Default to 'orig.ident' if group is not specified
-    aes_mappings <- aes(x = orig.ident, fill = orig.ident, color = orig.ident)
-    x_label <- "orig.ident"
+    NULL
+  }
+
+  # Define the aesthetic mappings based on the presence of a fill/color column
+  if (!is.null(fill_color_column)) {
+    aes_mappings <- aes(x = nCount_RNA, fill = .data[[fill_color_column]], color = .data[[fill_color_column]])
+  } else {
+    aes_mappings <- aes(x = nCount_RNA)
   }
 
   # Create the base plot
@@ -30,9 +42,9 @@ PlotUMIDensity <- function(seuratObject, group = NULL) {
     geom_density(alpha = 0.2) +
     scale_x_log10(limits = c(100, NA)) +
     theme_classic() +
-    xlab(x_label) +
+    xlab("UMI Counts") +
     ylab("Cell density") +
-    geom_vline(xintercept = 500) +
+    geom_vline(xintercept = vlineIntercept) +
     ggtitle("UMI counts (transcripts) per cell")
 
 
