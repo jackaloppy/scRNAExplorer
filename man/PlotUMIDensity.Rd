@@ -4,7 +4,7 @@
 \alias{PlotUMIDensity}
 \title{Plot UMI Counts Density from Seurat Object}
 \usage{
-PlotUMIDensity(seuratObject, sample = NULL)
+PlotUMIDensity(seuratObject, group = NULL, vlineIntercept = 500)
 }
 \arguments{
 \item{seuratObject}{A Seurat object.}

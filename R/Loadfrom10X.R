@@ -46,8 +46,8 @@ Loadfrom10X <- function(dataDir, project = "defaultProject", minCells = 3, minFe
                                            min.features = minFeatures)
 
   seurat_obj[["percent.mt"]] <- Seurat::PercentageFeatureSet(seurat_obj, pattern="(?i)^mt-")
-  seurat_obj[["percent.ribo"]] <- Seurat::PercentageFeatureSet(seurat_obj,pattern="^Rp[sl]")
-  seurat_obj[["percent.hb"]] <- Seurat::PercentageFeatureSet(seurat_obj, pattern="Hb[^(p)]")
+  seurat_obj[["percent.ribo"]] <- Seurat::PercentageFeatureSet(seurat_obj,pattern="^(?i)Rp[sl]")
+  seurat_obj[["percent.hb"]] <- Seurat::PercentageFeatureSet(seurat_obj, pattern="(?i)Hb[^(p)]")
 
   return(seurat_obj)
 }

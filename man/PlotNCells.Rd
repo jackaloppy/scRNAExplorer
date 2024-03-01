@@ -4,7 +4,7 @@
 \alias{PlotNCells}
 \title{Plot Number of Cells per Sample from Seurat Object Metadata}
 \usage{
-PlotNCells(seuratObject, sample = "orig.ident")
+PlotNCells(seuratObject, group = NULL)
 }
 \arguments{
 \item{seuratObject}{A Seurat object with a 'Group' column in the metadata.}

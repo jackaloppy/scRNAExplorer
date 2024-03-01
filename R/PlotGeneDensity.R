@@ -16,7 +16,7 @@
 #' plotGeneDensity(seuratObject)
 #' plotGeneDensity(seuratObject, group = "groups" , vlineIntercept = 300)
 #' @export
-plotGeneDensity <- function(seuratObject, group = NULL, vlineIntercept = 300) {
+PlotGeneDensity <- function(seuratObject, group = NULL, vlineIntercept = 300) {
   # Ensure the Seurat object is correctly provided
   if (!"Seurat" %in% class(seuratObject)) {
     stop("The provided object is not a Seurat object.")

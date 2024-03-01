@@ -16,7 +16,7 @@
 #' plotNoveltyScoreDensity(seuratObject)
 #' plotNoveltyScoreDensity(seuratObject, group = "sampleGroup", vlineIntercept = 0.8)
 #' @export
-plotNoveltyDensity <- function(seuratObject, group = NULL, vlineIntercept = 0.8) {
+PlotNoveltyDensity <- function(seuratObject, group = NULL, vlineIntercept = 0.8) {
   # Ensure the Seurat object is correctly provided
   if (!"Seurat" %in% class(seuratObject)) {
     stop("The provided object is not a Seurat object.")

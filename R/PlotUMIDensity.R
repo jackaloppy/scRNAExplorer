@@ -18,13 +18,11 @@ PlotUMIDensity <- function(seuratObject, group = NULL, vlineIntercept = 500) {
   # Extract metadata
   metadata <- seuratObject@meta.data
 
-  # Ensure nCount_RNA is treated as numeric, if it's not, try to convert it
-  metadata$nCount_RNA <- as.numeric(metadata$nCount_RNA)
-
   # Check for group or use a default column
   fill_color_column <- if (!is.null(group) && group %in% names(metadata)) {
     group
   } else if ('orig.ident' %in% names(metadata)) {
+    warning(paste0(group," is not in metadata. Use orig.ident instead."))
     'orig.ident'
   } else {
     NULL
