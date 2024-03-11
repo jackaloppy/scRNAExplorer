@@ -1,6 +1,6 @@
 Package: scRNAExplorer
 Type: Package
-Title: Analyze scRNA Data 
+Title: Analyze scRNA Data and generate QC plots
 Version: 0.1.0
 Author@R: person(
     "Ran", "Wei", 
